@@ -1,0 +1,101 @@
+#photolist {
+    position: relative;
+    height: 139px;
+}
+
+#photolist li {
+    display: none;
+    position: absolute;
+}
+
+#thumbnail-demo {
+    position: relative;
+    height: 300px;
+    width: 300px;
+}
+
+#thumbnail-demo .main {
+    position: relative;
+    height: 300px;
+}
+
+#thumbnail-demo .main li {
+    display: none;
+}
+
+#thumbnail-demo .main li:first-child {
+    display: block;
+}
+
+#thumbnail-demo .main img {
+    width: 300px;
+    height: auto;
+    position: absolute;
+}
+
+#thumbnail-demo .thumbnail {
+    display: inline-block;
+}
+
+#thumbnail-demo .thumbnail-box {
+    position: absolute;
+    z-index: 1;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+#thumbnail-demo .thumbnail li {
+    display: inline;
+    opacity: 0.5;
+}
+
+#thumbnail-demo .thumbnail li:first-child {
+    opacity: 1;
+}
+
+#thumbnail-demo .thumbnail img {
+    width: 50px;
+    height: auto;
+    cursor: pointer;
+}
+
+#button-demo {
+    position: relative;
+    width: 139px;
+    height: 139px;
+    overflow-x: hidden;
+}
+
+#button-demo i {
+    color: white;
+    background-color: green;
+    padding: 5px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#button-demo .button-left {
+    position: absolute;
+    left: 0px;
+    z-index: 1;
+    top: 50%;
+    margin-top: -17px;
+}
+
+#button-demo .button-right {
+    position: absolute;
+    right: 0px;
+    z-index: 1;
+    top: 50%;
+    margin-top: -17px;
+}
+
+#button-demo ul {
+    width: 558px;
+    position: absolute;
+}
+
+#button-demo li {
+    float: left;
+}

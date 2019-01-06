@@ -1,0 +1,18 @@
+img{
+    vertical-align: bottom;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+ul{
+    list-style-type: none;
+}
+
+body {
+    font-family: '楷体';
+}
