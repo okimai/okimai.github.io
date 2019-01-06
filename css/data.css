@@ -1,0 +1,54 @@
+.left {
+	margin-top: 5px;
+}
+
+.left li {
+	float: left;
+	margin-right: 10px;
+	padding: 5px 20px;
+}
+
+.left li:FIRST-CHILD {
+	background-color: #FFFCDB;
+}
+
+.left li:nth-child(2) {
+	background-color: #E1F4FF;
+}
+
+.left li:LAST-CHILD {
+	background-color: #FEE9E8;
+}
+
+.top:AFTER {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.threads .button{
+	padding: 0px;
+	font-weight: normal;
+	margin-top: 5px;
+}
+
+.threads .button div{
+	padding: 1px 15px;
+}
+
+.contents {
+	font-size: 17px;
+}
+
+.contents img {
+	height: 100%;
+}
+
+.threads span, .threads time {
+    margin: 3px 0px;
+    display: inline-block;
+}
+
+.threads ul{
+	display: none;
+}
