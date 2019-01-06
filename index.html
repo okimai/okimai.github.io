@@ -1,63 +1,161 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>サンプル</title>
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <!--<script src="https://cdn.bootcss.com/modernizr/2.8.3/modernizr.min.js"></script>-->
+   <meta charset="UTF-8"/>
+    <title>雏樱日语社</title>
+    <link type="text/css" rel="stylesheet" href="css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="css/data.css"/>
+    <!-- [if lt IE 9] >
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <![endif]  -->
+    <!-- [if gte IE 9] ><!-->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <!-- <![endif]  -->
+    <script src="js/common.js"></script>
+    <script>   
+    $(function(){
+    	
+    	var searchObj = getSearchObjByLocation(window.location.search
+				.substring(1));
+		var postSuccess= window.location.search.indexOf("postSuccess") != -1;
+		if(postSuccess)
+			alert("发布成功!");
+		var partId = "p2";
+		var page = searchObj.page == undefined ? 0 : searchObj.page;
+    	
+//    	$.ajax({
+//            url: "/part/page",
+//            data: {partId: partId, page: page}
+//        }).then(function(data) {   
+        
+        // 假设是ajax读取的数据
+        var data = {
+            "account":null,
+            "page":{
+                "hasPrevious":false,
+                "hasNext":true,
+                "threads":[
+                    {"threadId":"t17","partId":"p2","topic":"自他动词","latestTime":"2016-05-28 22:46","accName":"榕树","accId":"123","kindId":"1","kindColor":"FFFCDB","isTop":"<img src='icon/精.png' alt='精'/>"},
+                    {"threadId":"t25","partId":"p2","topic":"关于面试","latestTime":"2016-06-16 23:21","accName":"榕树","accId":"123","kindId":"1","kindColor":"FFFCDB","isTop":""},
+                    {"threadId":"t24","partId":"p2","topic":"次の（）に適当な言葉を書いてください。","latestTime":"2016-05-28 23:26","accName":"五十音都不会","accId":"12","kindId":"3","kindColor":"FEE9E8","isTop":""},
+                    {"threadId":"t21","partId":"p2","topic":"我猜“気持ち”没有舒服的意思。","latestTime":"2016-05-28 23:01","accName":"狗头","accId":"1234","kindId":"1","kindColor":"FFFCDB","isTop":""},
+                    {"threadId":"t23","partId":"p2","topic":"想给同样自学日语的unko们一些自己总结的经验","latestTime":"2016-05-28 22:52","accName":"五十音都不会","accId":"12","kindId":"1","kindColor":"FFFCDB","isTop":""},
+                    {"threadId":"t22","partId":"p2","topic":"日语如何入门","latestTime":"2016-05-28 22:51","accName":"狗头","accId":"1234","kindId":"1","kindColor":"FFFCDB","isTop":""},
+                    {"threadId":"t20","partId":"p2","topic":"一个普通人的日语学习记录帖","latestTime":"2016-05-28 22:49","accName":"凉风羽","accId":"1","kindId":"1","kindColor":"FFFCDB","isTop":""},
+                    {"threadId":"t19","partId":"p2","topic":"每日一句日语，定期更新 喜欢的可以来看下","latestTime":"2016-05-28 22:47","accName":"凉风羽","accId":"1","kindId":"1","kindColor":"FFFCDB","isTop":""},
+                    {"threadId":"t18","partId":"p2","topic":"求小伙伴一起学习日语","latestTime":"2016-05-28 22:46","accName":"榕树","accId":"123","kindId":"2","kindColor":"E1F4FF","isTop":""},
+                    {"threadId":"t16","partId":"p2","topic":"请问日本人はわたしではありません有错误么","latestTime":"2016-05-28 22:44","accName":"榕树","accId":"123","kindId":"1","kindColor":"FFFCDB","isTop":""}],
+                "previousPage":0,
+                "nextPage":1}
+        };
+        
+       //alert(JSON.stringify(data));
+
+
+
+       //threads
+       setHtmlByTemplate($(".threads ul"), data.page.threads);
+       $(".threads ul").fadeIn();
+
+       //page
+       //还需要获取前页，后页页码
+       if(data.page.hasPrevious == true){
+           $("#previous").css("z-index", "0");
+           $("#previous").css("opacity", "1");
+       }
+       if(data.page.hasNext == true){
+           $("#next").css("z-index", "0");
+           $("#next").css("opacity", "1");
+       }
+       if(data.page.hasPrevious == true && data.page.hasNext == true ){
+           $("#line").css("z-index", "0");
+           $("#line").css("opacity", "1");
+       }
+       setHtmlByTemplate($(".pagenation"), data.page, true);
+
+       //account
+        if (data.account != null) {
+            setHtmlByTemplate($(".logined"), data.account, true);
+            $(".logined").fadeIn();
+            $("#post").css("z-index", "0");
+            $("#post").animate({opacity: "1"});
+        } else {
+            $(".user").fadeIn();
+        }
+
+//        });
+    })
+
+    </script>
 </head>
 <body>
-<ul id="photolist">
-    <li><img src="images/icon01a.jpg"></li>
-    <li><img src="images/icon01b.jpg"></li>
-    <li><img src="images/icon02a.jpg"></li>
-    <li><img src="images/icon02b.jpg"></li>
-    <li><img src="images/icon03a.jpg"></li>
-    <li><img src="images/icon03b.jpg"></li>
-    <li><img src="images/icon04a.jpg"></li>
-    <li><img src="images/icon04b.jpg"></li>
-</ul>
-
-<div id="thumbnail-demo">
-    <ul class="main">
-        <li><img src="images/icon01a.jpg"></li>
-        <li><img src="images/icon02a.jpg"></li>
-        <li><img src="images/icon03a.jpg"></li>
-        <li><img src="images/icon04a.jpg"></li>
-    </ul>
-    <div class="thumbnail-box">
-        <ul class="thumbnail">
-            <li><img src="images/icon01b.jpg"></li>
-            <li><img src="images/icon02b.jpg"></li>
-            <li><img src="images/icon03b.jpg"></li>
-            <li><img src="images/icon04b.jpg"></li>
-        </ul>
-    </div>
-</div>
-<div id="button-demo">
-    <div class="button-left">
-        <i class="fa fa-angle-left"></i>
-    </div>
-    <div class="button-right">
-        <i class="fa fa-angle-right"></i>
-    </div>
-    <ul>
-        <li><img src="images/icon01a.jpg"></li>
-        <li><img src="images/icon02a.jpg"></li>
-        <li><img src="images/icon03a.jpg"></li>
-        <li><img src="images/icon04a.jpg"></li>
-    </ul>
-</div>
-<!-- [if lt IE 9] >
-<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-<![endif]  -->
-<!-- [if gte IE 9] ><!-->
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<!-- <![endif]  -->
-<script src="https://cdn.bootcss.com/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-<script src="js/main.js"></script>
+	<header>
+    	<div class="container">
+	   	 	<div class="logo">
+    			<img src="icon/雏樱日语社-页头.png" alt="雏樱日语社logo"/>
+    			<a href="index.html">雛桜日本語サークル</a>
+			</div>
+			<div class="user">
+				<a href="/login.html">
+					<div>
+						<p class="button" id="login">登陆</p>
+					</div>
+				</a> 
+				<a href="signin.html">
+					<div>
+						<p class="button" id="signin">注册</p>
+					</div>
+				</a>
+			</div>
+			<div class="logined">
+				<a href="/user.html?userId=$id$">
+					<div>
+						<p class="button" id="username">$name$</p>
+					</div>
+				</a> <a href="/logout">
+					<div>
+						<p class="button">注销</p>
+					</div>
+				</a>
+			</div>
+		</div>
+	</header>
+	<nav>
+		<div class="container">
+			<ul>
+				<li><a href="index.html">首页</a></li>
+				<li class="selected"><a href="nihongo.html">日语知识</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="contents">
+    	<div class="container">
+    		<div class="top">
+    			<ul class="left">
+    				<li>讨论帖</li>
+    				<li>资源帖</li>
+    				<li>作业帖</li>
+    			</ul>
+    			<ul class="pagenation">
+    				<li id="post"><a href="post.html?partId=p2">发帖</a></li>
+    				<li id="previous"><a href="nihongo.html?page=$previousPage$">上页</a></li>
+    				<li id="line">|</li>
+    				<li id="next"><a href="nihongo.html?page=$nextPage$">下页</a></li>
+    			</ul>
+    		</div>
+    		<div class="threads">
+    			<ul>
+					<li class="button">
+						<a href="/thread.html?threadId=$threadId$">
+							<div style="background-color: #$kindColor$">
+								<span>$topic$</span>$isTop$
+								<time datetime="$latestTime$">$latestTime$</time>
+							</div>
+						</a>
+					</li>
+				</ul>
+    		</div>
+		</div>
+	</div>
 </body>
 </html>
