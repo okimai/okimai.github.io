@@ -14,66 +14,57 @@
     <script src="js/common.js"></script>
     <script>   
     $(function(){
-    	
-    	var searchObj = getSearchObjByLocation(window.location.search
-				.substring(1));
-		var postSuccess= window.location.search.indexOf("postSuccess") != -1;
-		if(postSuccess)
-			alert("发布成功!");
-		var partId = "p2";
-		var page = searchObj.page == undefined ? 0 : searchObj.page;
-    	
-//    	$.ajax({
-//            url: "/part/page",
-//            data: {partId: partId, page: page}
-//        }).then(function(data) {   
         
         // 假设是ajax读取的数据
         var data = {
-            "account":null,
+            "account":{
+                "name":"顾问",
+                "id":3113002392
+            },
             "page":{
                 "hasPrevious":false,
                 "hasNext":true,
                 "threads":[
-                    {"threadId":"t17","partId":"p2","topic":"自他动词","latestTime":"2016-05-28 22:46","accName":"榕树","accId":"123","kindId":"1","kindColor":"FFFCDB","isTop":"<img src='icon/精.png' alt='精'/>"},
-                    {"threadId":"t25","partId":"p2","topic":"关于面试","latestTime":"2016-06-16 23:21","accName":"榕树","accId":"123","kindId":"1","kindColor":"FFFCDB","isTop":""},
-                    {"threadId":"t24","partId":"p2","topic":"次の（）に適当な言葉を書いてください。","latestTime":"2016-05-28 23:26","accName":"五十音都不会","accId":"12","kindId":"3","kindColor":"FEE9E8","isTop":""},
-                    {"threadId":"t21","partId":"p2","topic":"我猜“気持ち”没有舒服的意思。","latestTime":"2016-05-28 23:01","accName":"狗头","accId":"1234","kindId":"1","kindColor":"FFFCDB","isTop":""},
-                    {"threadId":"t23","partId":"p2","topic":"想给同样自学日语的unko们一些自己总结的经验","latestTime":"2016-05-28 22:52","accName":"五十音都不会","accId":"12","kindId":"1","kindColor":"FFFCDB","isTop":""},
-                    {"threadId":"t22","partId":"p2","topic":"日语如何入门","latestTime":"2016-05-28 22:51","accName":"狗头","accId":"1234","kindId":"1","kindColor":"FFFCDB","isTop":""},
-                    {"threadId":"t20","partId":"p2","topic":"一个普通人的日语学习记录帖","latestTime":"2016-05-28 22:49","accName":"凉风羽","accId":"1","kindId":"1","kindColor":"FFFCDB","isTop":""},
-                    {"threadId":"t19","partId":"p2","topic":"每日一句日语，定期更新 喜欢的可以来看下","latestTime":"2016-05-28 22:47","accName":"凉风羽","accId":"1","kindId":"1","kindColor":"FFFCDB","isTop":""},
-                    {"threadId":"t18","partId":"p2","topic":"求小伙伴一起学习日语","latestTime":"2016-05-28 22:46","accName":"榕树","accId":"123","kindId":"2","kindColor":"E1F4FF","isTop":""},
-                    {"threadId":"t16","partId":"p2","topic":"请问日本人はわたしではありません有错误么","latestTime":"2016-05-28 22:44","accName":"榕树","accId":"123","kindId":"1","kindColor":"FFFCDB","isTop":""}],
+                    {"threadId":"t17","partId":"p2","topic":"自他动词","latestTime":"2016-05-28 22:46","accName":"榕树","accId":"123","kindId":"1","kind":"discussion","isTop":"<img src='icon/精.png' alt='精'/>"},
+                    {"threadId":"t25","partId":"p2","topic":"关于面试","latestTime":"2016-06-16 23:21","accName":"榕树","accId":"123","kindId":"1","kind":"discussion","isTop":""},
+                    {"threadId":"t24","partId":"p2","topic":"次の（）に適当な言葉を書いてください。","latestTime":"2016-05-28 23:26","accName":"五十音都不会","accId":"12","kindId":"3","kind":"resource","isTop":""},
+                    {"threadId":"t21","partId":"p2","topic":"我猜“気持ち”没有舒服的意思。","latestTime":"2016-05-28 23:01","accName":"狗头","accId":"1234","kindId":"1","kind":"discussion","isTop":""},
+                    {"threadId":"t23","partId":"p2","topic":"想给同样自学日语的unko们一些自己总结的经验","latestTime":"2016-05-28 22:52","accName":"五十音都不会","accId":"12","kindId":"1","kind":"discussion","isTop":""},
+                    {"threadId":"t22","partId":"p2","topic":"日语如何入门","latestTime":"2016-05-28 22:51","accName":"狗头","accId":"1234","kindId":"1","kind":"discussion","isTop":""},
+                    {"threadId":"t20","partId":"p2","topic":"一个普通人的日语学习记录帖","latestTime":"2016-05-28 22:49","accName":"凉风羽","accId":"1","kindId":"1","kind":"discussion","isTop":""},
+                    {"threadId":"t19","partId":"p2","topic":"每日一句日语，定期更新 喜欢的可以来看下","latestTime":"2016-05-28 22:47","accName":"凉风羽","accId":"1","kindId":"1","kind":"discussion","isTop":""},
+                    {"threadId":"t18","partId":"p2","topic":"求小伙伴一起学习日语","latestTime":"2016-05-28 22:46","accName":"榕树","accId":"123","kindId":"2","kind":"homework","isTop":""},
+                    {"threadId":"t16","partId":"p2","topic":"请问日本人はわたしではありません有错误么","latestTime":"2016-05-28 22:44","accName":"榕树","accId":"123","kindId":"1","kind":"resource","isTop":""}],
                 "previousPage":0,
                 "nextPage":1}
         };
-        
+        // kind discussion FFFCDB, resource FEE9E8, homework E1F4FF
        //alert(JSON.stringify(data));
 
+        // 描画帖子数据(threads)
+        setHtmlByTemplate($(".threads ul"), data.page.threads);
+        $(".threads ul").fadeIn();
 
-
-       //threads
-       setHtmlByTemplate($(".threads ul"), data.page.threads);
-       $(".threads ul").fadeIn();
-
-       //page
-       //还需要获取前页，后页页码
-       if(data.page.hasPrevious == true){
+        // 描画分页数据(page)
+        // 上一页
+        if(data.page.hasPrevious == true){
            $("#previous").css("z-index", "0");
            $("#previous").css("opacity", "1");
-       }
-       if(data.page.hasNext == true){
+        }
+        // 下一页
+        if(data.page.hasNext == true){
            $("#next").css("z-index", "0");
            $("#next").css("opacity", "1");
-       }
-       if(data.page.hasPrevious == true && data.page.hasNext == true ){
+        }
+        // 分割线
+        if(data.page.hasPrevious == true && data.page.hasNext == true ){
            $("#line").css("z-index", "0");
            $("#line").css("opacity", "1");
-       }
-       setHtmlByTemplate($(".pagenation"), data.page, true);
+        }
+        // 页码
+        setHtmlByTemplate($(".pagenation"), data.page, true);
 
-       //account
+        // 描画账户数据(account)
         if (data.account != null) {
             setHtmlByTemplate($(".logined"), data.account, true);
             $(".logined").fadeIn();
@@ -82,11 +73,10 @@
         } else {
             $(".user").fadeIn();
         }
-
-//        });
     })
 
     </script>
+    
 </head>
 <body>
 	<header>
@@ -132,9 +122,9 @@
     	<div class="container">
     		<div class="top">
     			<ul class="left">
-    				<li>讨论帖</li>
-    				<li>资源帖</li>
-    				<li>作业帖</li>
+                    <li><span class="discussion-square color-square"></span>讨论帖</li>
+    				<li><span class="resource-square color-square"></span>资源帖</li>
+    				<li><span class="homework-square color-square"></span>作业帖</li>
     			</ul>
     			<ul class="pagenation">
     				<li id="post"><a href="post.html?partId=p2">发帖</a></li>
@@ -147,7 +137,7 @@
     			<ul>
 					<li class="button">
 						<a href="/thread.html?threadId=$threadId$">
-							<div style="background-color: #$kindColor$">
+							<div class="$kind$">
 								<span>$topic$</span>$isTop$
 								<time datetime="$latestTime$">$latestTime$</time>
 							</div>

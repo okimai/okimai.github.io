@@ -8,16 +8,28 @@
 	padding: 5px 20px;
 }
 
-.left li:FIRST-CHILD {
+.discussion {
 	background-color: #FFFCDB;
 }
 
-.left li:nth-child(2) {
+.discussion-square {
+    border-color: #FFFCDB;
+}
+
+.homework {
 	background-color: #E1F4FF;
 }
 
-.left li:LAST-CHILD {
+.homework-square {
+    border-color: #E1F4FF;
+}
+
+.resource {
 	background-color: #FEE9E8;
+}
+
+.resource-square {
+    border-color: #FEE9E8;
 }
 
 .top:AFTER {
@@ -37,7 +49,7 @@
 }
 
 .contents {
-	font-size: 17px;
+	font-size: 14px;
 }
 
 .contents img {
