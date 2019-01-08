@@ -92,10 +92,20 @@ header .logo a {
 	position: absolute;
 	right: 0px;
 	top: 28%;
-	letter-spacing: 4px;
+}
+
+.main-title {
+   	letter-spacing: 4px;
     font-size: 20px;
     font-family: Helvetica, Arial, sans-serif;
-    font-weight: bold;
+    font-weight: bold; 
+}
+
+.sub-title {
+   	letter-spacing: 2px;
+    font-size: 14px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold; 
 }
 
 header .container{
