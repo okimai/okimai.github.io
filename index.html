@@ -42,6 +42,21 @@
        //alert(JSON.stringify(data));
 
         // 描画帖子数据(threads)
+        
+        $.each(data.page.threads, function( index, value ) {
+            // sry, tankaDiffはあらかじめjava側で現在月以後の値を設定する
+            // js側でsry, tankaDiffのみif判断を追加する
+            if(value.topic){
+                $("[name=threads\\[" + index + "\\]\\.topic]").text(value.topic);
+            }
+            $("[name=threads\\[" + index + "\\]\\.accName]").text(/*formatNumber("12341234.5678", 3)*/ value.accName);
+        });
+        
+        function formatNumber (str, decimalDigit) {
+            var num = parseFloat(str).toFixed(3)
+            return Number(num).toLocaleString('en');
+        }
+        
         setHtmlByTemplate($(".threads ul"), data.page.threads);
         $(".threads ul").fadeIn();
 
@@ -150,6 +165,40 @@
     		</div>
 		</div>
 	</div>
+	
+	<table>
+        <tr>
+            <td></td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+        </tr>
+        <tr>
+	        <td name="topic">topic</td>
+	        <td name="threads[0].topic"></td>
+	        <td name="threads[1].topic"></td>
+	        <td name="threads[2].topic"></td>
+	        <td name="threads[3].topic"></td>
+	        <td name="threads[4].topic"></td>
+	        <td name="threads[5].topic"></td>
+	        <td name="threads[6].topic"></td>
+	    </tr>
+	    <tr>
+	        <td name="accName">accName</td>
+	        <td name="threads[0].accName"></td>
+	        <td name="threads[1].accName"></td>
+	        <td name="threads[2].accName"></td>
+	        <td name="threads[3].accName"></td>
+	        <td name="threads[4].accName"></td>
+	        <td name="threads[5].accName"></td>
+	        <td name="threads[6].accName"></td>
+	    </tr>
+	</table>
+	
 	<footer><div class="container">© 雛桜日本語サークル</div></footer>
 </body>
 </html>
