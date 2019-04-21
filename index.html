@@ -25,13 +25,13 @@
                 "hasPrevious":false,
                 "hasNext":true,
                 "threads":[
-                    {"threadId":"t17","partId":"p2","topic":"在选择考研的学校，有点小麻烦","latestTime":"2019-01-08 22:43","accName":"榕树","accId":"123","kindId":"1","kind":"discussion","isTop":"<img src='icon/精.png' alt='精'/>"},
-                    {"threadId":"t25","partId":"p2","topic":"我想起我的毕设，水的很","latestTime":"2019-01-06 23:56","accName":"榕树","accId":"123","kindId":"1","kind":"discussion","isTop":""},
-                    {"threadId":"t24","partId":"p2","topic":"ゆがまない　おもいでは　ばかみたい。","latestTime":"2018-12-27 21:15","accName":"五十音都不会","accId":"12","kindId":"3","kind":"resource","isTop":""},
-                    {"threadId":"t21","partId":"p2","topic":"你要对待书本像老婆一样，换什么口味！","latestTime":"2018-12-27 21:13","accName":"狗头","accId":"1234","kindId":"1","kind":"discussion","isTop":""},
-                    {"threadId":"t22","partId":"p2","topic":"你当他是漫画，看一次就是了","latestTime":"2018-12-27 20:59","accName":"狗头","accId":"1234","kindId":"1","kind":"discussion","isTop":""},
-                    {"threadId":"t20","partId":"p2","topic":"感觉只会前端不够呀，感觉至少得会php","latestTime":"2018-12-27 20:58","accName":"凉风羽","accId":"1","kindId":"1","kind":"discussion","isTop":""},
-                    {"threadId":"t23","partId":"p2","topic":"那个河马？小肥肥一族","latestTime":"2018-11-12 10:33","accName":"五十音都不会","accId":"12","kindId":"1","kind":"discussion","isTop":""},
+                    {"threadId":"t17","partId":"p2","topic":"在选择考研的学校，有点小麻烦","latestTime":"2019-01-08 22:43","accName":"榕树","accId":"123","kindId":"1","kind":"discussion","isTop":"<img src='icon/精.png' alt='精'/>", "targetYm": "201904"},
+                    {"threadId":"t25","partId":"p2","topic":"我想起我的毕设，水的很","latestTime":"2019-01-06 23:56","accName":"榕树","accId":"123","kindId":"1","kind":"discussion","isTop":"", "targetYm": "201905"},
+                    {"threadId":"t24","partId":"p2","topic":"ゆがまない　おもいでは　ばかみたい。","latestTime":"2018-12-27 21:15","accName":"五十音都不会","accId":"12","kindId":"3","kind":"resource","isTop":"", "targetYm": "201906"},
+                    {"threadId":"t21","partId":"p2","topic":"你要对待书本像老婆一样，换什么口味！","latestTime":"2018-12-27 21:13","accName":"狗头","accId":"1234","kindId":"1","kind":"discussion","isTop":"", "targetYm": "201907"},
+                    {"threadId":"t22","partId":"p2","topic":"你当他是漫画，看一次就是了","latestTime":"2018-12-27 20:59","accName":"狗头","accId":"1234","kindId":"1","kind":"discussion","isTop":"", "targetYm": "201908"},
+                    {"threadId":"t20","partId":"p2","topic":"感觉只会前端不够呀，感觉至少得会php","latestTime":"2018-12-27 20:58","accName":"凉风羽","accId":"1","kindId":"1","kind":"discussion","isTop":"", "targetYm": "201909"},
+                    {"threadId":"t23","partId":"p2","topic":"那个河马？小肥肥一族","latestTime":"2018-11-12 10:33","accName":"五十音都不会","accId":"12","kindId":"1","kind":"discussion","isTop":"", "targetYm": "201910"},
                     {"threadId":"t19","partId":"p2","topic":"每日一句日语，定期更新 喜欢的可以来看下","latestTime":"2016-05-28 22:47","accName":"凉风羽","accId":"1","kindId":"1","kind":"discussion","isTop":""},
                     {"threadId":"t18","partId":"p2","topic":"求小伙伴一起学习日语","latestTime":"2016-05-28 22:46","accName":"榕树","accId":"123","kindId":"2","kind":"homework","isTop":""},
                     {"threadId":"t16","partId":"p2","topic":"请问日本人はわたしではありません有错误么","latestTime":"2016-05-28 22:44","accName":"榕树","accId":"123","kindId":"1","kind":"resource","isTop":""}],
@@ -43,17 +43,38 @@
 
         // 描画帖子数据(threads)
         
-        $.each(data.page.threads, function( index, value ) {
-            // sry, tankaDiffはあらかじめjava側で現在月以後の値を設定する
-            // js側でsry, tankaDiffのみif判断を追加する
-            if(value.topic){
-                $("[name=threads\\[" + index + "\\]\\.topic]").text(value.topic);
-            }
-            $("[name=threads\\[" + index + "\\]\\.accName]").text(/*formatNumber("12341234.5678", 3)*/ value.accName);
+
+        // targetYm ->
+        // detail nendo label
+        // ajax
+        $("input[name=targetYm]").change(function(){
+           ajax(); 
         });
+
+
         
+        function ajax() {
+            // targetYm kind: text or hidden
+
+            var targetYm = $("input[name=targetYm]").val();
+
+            $.each(data.page.threads, function( index, value ) {
+
+                // sry, tankaDiff
+                if(value.targetYm < targetYm ){
+                    $("span[name=threads\\[" + index + "\\]\\.topic]").text(value.topic);
+                    $("input[name=threads\\[" + index + "\\]\\.topic]").attr({"value": value.topic, "type": "hidden"});
+                 } else {
+                    $("span[name=threads\\[" + index + "\\]\\.topic]").text("");
+                    $("input[name=threads\\[" + index + "\\]\\.topic]").attr({"value": "0", "type": "text"});
+                 }
+
+                // other fields
+                $("span[name=threads\\[" + index + "\\]\\.accName]").text(/*formatNumber("12341234.5678", 3)*/ value.accName);
+            });            
+        }
+
         function formatNumber (str, decimalDigit) {
-            var num = parseFloat(str).toFixed(3)
             return Number(num).toLocaleString('en');
         }
         
@@ -168,7 +189,7 @@
 	
 	<table>
         <tr>
-            <td></td>
+            <td><input type="text" name="targetYm" value="201907"></td>
             <td>1</td>
             <td>2</td>
             <td>3</td>
@@ -178,14 +199,38 @@
             <td>7</td>
         </tr>
         <tr>
+            <!-- detail: span content, input hidden -->
+            <!-- add/edit - before: span content, input hidden -->
+            <!-- add/edit - after : span none, input text content -->
 	        <td name="topic">topic</td>
-	        <td name="threads[0].topic"></td>
-	        <td name="threads[1].topic"></td>
-	        <td name="threads[2].topic"></td>
-	        <td name="threads[3].topic"></td>
-	        <td name="threads[4].topic"></td>
-	        <td name="threads[5].topic"></td>
-	        <td name="threads[6].topic"></td>
+	        <td>
+               <span name="threads[0].topic"></span>
+               <input type="hidden" name="threads[0].topic">
+            </td>
+	        <td>
+                <span name="threads[1].topic"></span>
+               <input type="hidden" name="threads[1].topic">
+            </td>
+	        <td>
+               <span name="threads[2].topic"></span>
+               <input type="hidden" name="threads[2].topic">
+            </td>
+            <td>
+               <span name="threads[3].topic"></span>
+               <input type="text" name="threads[3].topic">
+            </td>
+            <td>
+               <span name="threads[4].topic"></span>
+               <input type="text" name="threads[4].topic">
+            </td>
+            <td>
+               <span name="threads[5].topic"></span>
+               <input type="text" name="threads[5].topic">
+            </td>
+	        <td>
+               <span name="threads[6].topic"></span>
+               <input type="text" name="threads[6].topic">
+            </td>
 	    </tr>
 	    <tr>
 	        <td name="accName">accName</td>
