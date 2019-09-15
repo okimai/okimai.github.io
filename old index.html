@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8"/>
+    <title>雏樱日语社</title>
+    <link type="text/css" rel="stylesheet" href="css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="css/data.css"/>
+    <!-- [if lt IE 9] >
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <![endif]  -->
+    <!-- [if gte IE 9] ><!-->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <!-- <![endif]  -->
+    <script src="js/common.js"></script>
+    <script>   
+    $(function(){
+        
+        // 假设是ajax读取的数据
+        var data = {
+            "account":{
+                "name":"钊钊",
+                "id":3113002392
+            },
+            "page":{
+                "hasPrevious":false,
+                "hasNext":true,
+                "threads":[
+                    {"threadId":"t17","partId":"p2","topic":"在选择考研的学校，有点小麻烦","latestTime":"2019-01-08 22:43","accName":"榕树","accId":"123","kindId":"1","kind":"discussion","isTop":"<img src='icon/精.png' alt='精'/>", "targetYm": "201904"},
+                    {"threadId":"t25","partId":"p2","topic":"我想起我的毕设，水的很","latestTime":"2019-01-06 23:56","accName":"榕树","accId":"123","kindId":"1","kind":"discussion","isTop":"", "targetYm": "201905"},
+                    {"threadId":"t24","partId":"p2","topic":"ゆがまない　おもいでは　ばかみたい。","latestTime":"2018-12-27 21:15","accName":"五十音都不会","accId":"12","kindId":"3","kind":"resource","isTop":"", "targetYm": "201906"},
+                    {"threadId":"t21","partId":"p2","topic":"你要对待书本像老婆一样，换什么口味！","latestTime":"2018-12-27 21:13","accName":"狗头","accId":"1234","kindId":"1","kind":"discussion","isTop":"", "targetYm": "201907"},
+                    {"threadId":"t22","partId":"p2","topic":"你当他是漫画，看一次就是了","latestTime":"2018-12-27 20:59","accName":"狗头","accId":"1234","kindId":"1","kind":"discussion","isTop":"", "targetYm": "201908"},
+                    {"threadId":"t20","partId":"p2","topic":"感觉只会前端不够呀，感觉至少得会php","latestTime":"2018-12-27 20:58","accName":"凉风羽","accId":"1","kindId":"1","kind":"discussion","isTop":"", "targetYm": "201909"},
+                    {"threadId":"t23","partId":"p2","topic":"那个河马？小肥肥一族","latestTime":"2018-11-12 10:33","accName":"五十音都不会","accId":"12","kindId":"1","kind":"discussion","isTop":"", "targetYm": "201910"},
+                    {"threadId":"t19","partId":"p2","topic":"每日一句日语，定期更新 喜欢的可以来看下","latestTime":"2016-05-28 22:47","accName":"凉风羽","accId":"1","kindId":"1","kind":"discussion","isTop":""},
+                    {"threadId":"t18","partId":"p2","topic":"求小伙伴一起学习日语","latestTime":"2016-05-28 22:46","accName":"榕树","accId":"123","kindId":"2","kind":"homework","isTop":""},
+                    {"threadId":"t16","partId":"p2","topic":"请问日本人はわたしではありません有错误么","latestTime":"2016-05-28 22:44","accName":"榕树","accId":"123","kindId":"1","kind":"resource","isTop":""}],
+                "previousPage":0,
+                "nextPage":1}
+        };
+        // kind discussion FFFCDB, resource FEE9E8, homework E1F4FF
+       //alert(JSON.stringify(data));
+
+        // 描画帖子数据(threads)
+        
+
+        // targetYm ->
+        // detail nendo label
+        // ajax
+        $("input[name=targetYm]").change(function(){
+           ajax(); 
+        });
+
+
+        
+        function ajax() {
+            // targetYm kind: text or hidden
+
+            var targetYm = $("input[name=targetYm]").val();
+
+            $.each(data.page.threads, function( index, value ) {
+
+                // sry, tankaDiff
+                if(value.targetYm < targetYm ){
+                    $("span[name=threads\\[" + index + "\\]\\.topic]").text(value.topic);
+                    $("input[name=threads\\[" + index + "\\]\\.topic]").attr({"value": value.topic, "type": "hidden"});
+                 } else {
+                    $("span[name=threads\\[" + index + "\\]\\.topic]").text("");
+                    $("input[name=threads\\[" + index + "\\]\\.topic]").attr({"value": "0", "type": "text"});
+                 }
+
+                // other fields
+                $("span[name=threads\\[" + index + "\\]\\.accName]").text(/*formatNumber("12341234.5678", 3)*/ value.accName);
+            });            
+        }
+
+        function formatNumber (str, decimalDigit) {
+            return Number(num).toLocaleString('en');
+        }
+        
+        setHtmlByTemplate($(".threads ul"), data.page.threads);
+        $(".threads ul").fadeIn();
+
+        // 描画分页数据(page)
+        // 上一页
+        if(data.page.hasPrevious == true){
+           $("#previous").css("z-index", "0");
+           $("#previous").css("opacity", "1");
+        }
+        // 下一页
+        if(data.page.hasNext == true){
+           $("#next").css("z-index", "0");
+           $("#next").css("opacity", "1");
+        }
+        // 分割线
+        if(data.page.hasPrevious == true && data.page.hasNext == true ){
+           $("#line").css("z-index", "0");
+           $("#line").css("opacity", "1");
+        }
+        // 页码
+        setHtmlByTemplate($(".pagenation"), data.page, true);
+
+        // 描画账户数据(account)
+        if (data.account != null) {
+            setHtmlByTemplate($(".logined"), data.account, true);
+            $(".logined").fadeIn();
+            $("#post").css("z-index", "0");
+            $("#post").animate({opacity: "1"});
+        } else {
+            $(".user").fadeIn();
+        }
+    })
+
+    </script>
+    
+</head>
+<body>
+	<header>
+    	<div class="container">
+	   	 	<div class="logo">
+    			<img src="icon/雏樱日语社-页头.png" alt="雏樱日语社logo"/>
+    			<a href="index.html"><div>
+    			    <div class="main-title">雛桜日本語サークル</div>
+    			    <div class="sub-title">一直坚持，越上课，越少人来</div>
+    			</div></a>
+			</div>
+			<div class="user">
+				<a href="/login.html">
+					<div>
+						<p class="button" id="login">登陆</p>
+					</div>
+				</a> 
+				<a href="signin.html">
+					<div>
+						<p class="button" id="signin">注册</p>
+					</div>
+				</a>
+			</div>
+			<div class="logined">
+				<a href="/user.html?userId=$id$">
+					<div>
+						<p class="button" id="username">$name$</p>
+					</div>
+				</a> <a href="/logout">
+					<div>
+						<p class="button">注销</p>
+					</div>
+				</a>
+			</div>
+		</div>
+	</header>
+	<nav>
+		<div class="container">
+			<ul>
+				<li><a href="index.html">首页</a></li>
+				<li class="selected"><a href="nihongo.html">日语知识</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="contents">
+    	<div class="container">
+    		<div class="top">
+    			<ul class="left">
+                    <li><span class="discussion-square color-square"></span>讨论帖</li>
+    				<li><span class="resource-square color-square"></span>资源帖</li>
+    				<li><span class="homework-square color-square"></span>作业帖</li>
+    			</ul>
+    			<ul class="pagenation">
+    				<li id="post"><a href="post.html?partId=p2">发帖</a></li>
+    				<li id="previous"><a href="nihongo.html?page=$previousPage$">上页</a></li>
+    				<li id="line">|</li>
+    				<li id="next"><a href="nihongo.html?page=$nextPage$">下页</a></li>
+    			</ul>
+    		</div>
+    		<div class="threads">
+    			<ul>
+					<li class="button">
+						<a href="/thread.html?threadId=$threadId$">
+							<div class="$kind$">
+								<span>$topic$</span>$isTop$
+								<time datetime="$latestTime$">$latestTime$</time>
+							</div>
+						</a>
+					</li>
+				</ul>
+    		</div>
+		</div>
+	</div>
+	
+	<table>
+        <tr>
+            <td><input type="text" name="targetYm" value="201907"></td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+        </tr>
+        <tr>
+            <!-- detail: span content, input hidden -->
+            <!-- add/edit - before: span content, input hidden -->
+            <!-- add/edit - after : span none, input text content -->
+	        <td name="topic">topic</td>
+	        <td>
+               <span name="threads[0].topic"></span>
+               <input type="hidden" name="threads[0].topic">
+            </td>
+	        <td>
+                <span name="threads[1].topic"></span>
+               <input type="hidden" name="threads[1].topic">
+            </td>
+	        <td>
+               <span name="threads[2].topic"></span>
+               <input type="hidden" name="threads[2].topic">
+            </td>
+            <td>
+               <span name="threads[3].topic"></span>
+               <input type="text" name="threads[3].topic">
+            </td>
+            <td>
+               <span name="threads[4].topic"></span>
+               <input type="text" name="threads[4].topic">
+            </td>
+            <td>
+               <span name="threads[5].topic"></span>
+               <input type="text" name="threads[5].topic">
+            </td>
+	        <td>
+               <span name="threads[6].topic"></span>
+               <input type="text" name="threads[6].topic">
+            </td>
+	    </tr>
+	    <tr>
+	        <td name="accName">accName</td>
+	        <td name="threads[0].accName"></td>
+	        <td name="threads[1].accName"></td>
+	        <td name="threads[2].accName"></td>
+	        <td name="threads[3].accName"></td>
+	        <td name="threads[4].accName"></td>
+	        <td name="threads[5].accName"></td>
+	        <td name="threads[6].accName"></td>
+	    </tr>
+	</table>
+	
+	<footer><div class="container">© 雛桜日本語サークル</div></footer>
+</body>
+</html>
