@@ -1,84 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-   <meta charset="UTF-8"/>
-    <title>雏樱日语社</title>
-    <style type="text/css">
-
-        body {
-            font-size:14px;
-            font-family: Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
-            letter-spacing: 1px;
+    <meta charset="UTF-8">
+    <title>【宿題No.1】指定するサイトを作成する</title>
+    <link rel="stylesheet" href="new.css">
+    <style>
+        body{
             margin: 0;
         }
-
-        .container {
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        header {
+        header{
+            border-bottom:1px solid black ;
+            padding: 10px;
             width: 100%;
-            border-bottom: 1px solid #f9a2b2;
-            line-height: 30px;
-            padding-bottom: 5px;
         }
-
-        footer {
+        header p{
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        footer{
+            border-top: 1px solid black;
             position: fixed;
             left: 0;
             bottom: 0;
-            width: 100%;
-            border-top: 1px solid #f9a2b2;
-            line-height: 30px;
-            padding-bottom: 5px;
+            width: 100vw;
+            background-color: white;
+        }
+        footer p{
             text-align: center;
-            background: white;
         }
-
-        main {
-            width: 100%;
+        main .container{
+            border-top: none;
+            border-bottom: none;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+            margin: 0;
+            box-sizing:border-box;
         }
-
-        .block {
-            width: 50%;
+        .con{
+            box-sizing:border-box;
+            width:50%;
+            border:1px solid red;
+            float:left;
             min-height: 300px;
-            border: 1px solid #f9a2b2;
-            box-sizing: border-box;
-            float: left;
+            margin: 0;
         }
-
-        .block * {
-            box-sizing: content-box;
+        #conA{
+            border: 1px solid black;
+            flex: 0 0 49.7%;
+            margin: 0;
+            padding: 0;
+            min-height: 300px;
+            border-top: none;
         }
-
-        .no-border-top {
+        #conB{
+            flex: 0 0 50%;
+            border: 1px solid black;
+            margin: 0;
+            padding: 0;
+            min-height: 300px;
+            border-top: none;
+            border-left: none;
+        }
+        #conC{
+            border: 1px solid black;
+            flex: 0 0 49.7%;
+            margin: 0;
+            padding: 0;
+            min-height: 300px;
+            border-top: none;
+            border-bottom: none;
+        }
+        #conD{
+            flex: 0 0 50%;
+            border: 1px solid black;
+            margin: 0;
+            padding: 0;
+            min-height: 300px;
+            border-top: none;
+            border-left: none;
+            border-bottom: none;
+        }
+        @media (min-width: 700px) {
+            main .container{
+                display: flex;
+                margin-right: auto;
+                margin-left: auto;
+                max-width: 1000px;
+            }
+        }
+        .conx{
+            box-sizing:border-box;
+            width:100%;
+            border:1px solid red;
+            float:left;
+            min-height: 300px;
+            margin: 0;
             border-top: none;
         }
 
-        .no-border-right {
-            border-right: none;
-        }
-
     </style>
-    <!-- [if lt IE 9] >
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <![endif]  -->
-    <!-- [if gte IE 9] ><!-->
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <!-- <![endif]  -->
-    <script src="js/common.js"></script>
 </head>
 <body>
-    <header><div class="container">計画通りさんの宿題<span style="margin-left: 20px">作者：okimai</span></div></header>
-    <main role="main">
-        <div class="container">
-            <div class="block no-border-top no-border-right"></div>
-            <div class="block no-border-top"></div>
-            <div class="block no-border-top no-border-right"></div>
-            <div class="block no-border-top"></div>
-        </div>
-    </main>
-	<footer><div class="container">© 雛桜日本語サークル</div></footer>
+<header>
+    <p>計画通りさんの宿題　作者：okimai</p>
+</header>
+<main>
+    <section class="container">
+        <p class="conx">A</p>
+        <p class="conx">B</p>
+        <p class="conx">C</p>
+        <p class="conx">D</p>
+    </section>
+</main>
+
+<footer>
+    <p>©雛桜日本語サークル</p>
+</footer>
 </body>
 </html>
