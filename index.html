@@ -1,84 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-   <meta charset="UTF-8"/>
-    <title>雏樱日语社</title>
-    <style type="text/css">
-
-        body {
-            font-size:14px;
-            font-family: Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
-            letter-spacing: 1px;
+    <meta charset="UTF-8">
+    <title>【レスポンシブ練習1】</title>
+    <link rel="stylesheet" href="new.css">
+    <style>
+        body{
             margin: 0;
         }
-
-        .container {
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        header {
+        header{
+            border-bottom:1px solid black ;
+            padding: 10px;
             width: 100%;
-            border-bottom: 1px solid #f9a2b2;
-            line-height: 30px;
-            padding-bottom: 5px;
         }
-
-        footer {
+        header p{
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        footer{
+            border-top: 1px solid black;
             position: fixed;
             left: 0;
             bottom: 0;
-            width: 100%;
-            border-top: 1px solid #f9a2b2;
-            line-height: 30px;
-            padding-bottom: 5px;
+            width: 100vw;
+            background-color: white;
+        }
+        footer p{
             text-align: center;
-            background: white;
         }
-
-        main {
-            width: 100%;
-        }
-
-        .block {
-            width: 50%;
-            min-height: 300px;
-            border: 1px solid #f9a2b2;
-            box-sizing: border-box;
-            float: left;
-        }
-
-        .block * {
-            box-sizing: content-box;
-        }
-
-        .no-border-top {
+        main .container{
             border-top: none;
+            border-bottom: none;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+            margin: 0;
+            box-sizing:border-box;
         }
-
-        .no-border-right {
-            border-right: none;
+        .con{
+            box-sizing:border-box;
+            width:50%;
+            border:1px solid red;
+            float:left;
+            min-height: 300px;
+            margin: 0;
         }
-
+        @media (min-width: 700px) {
+            main .container{
+                display: flex;
+                margin-right: auto;
+                margin-left: auto;
+                max-width: 1000px;
+            }
+        }
     </style>
-    <!-- [if lt IE 9] >
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <![endif]  -->
-    <!-- [if gte IE 9] ><!-->
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <!-- <![endif]  -->
-    <script src="js/common.js"></script>
 </head>
 <body>
-    <header><div class="container">計画通りさんの宿題<span style="margin-left: 20px">作者：okimai</span></div></header>
-    <main role="main">
-        <div class="container">
-            <div class="block no-border-top no-border-right"></div>
-            <div class="block no-border-top"></div>
-            <div class="block no-border-top no-border-right"></div>
-            <div class="block no-border-top"></div>
-        </div>
+    <header>
+        <p>計画通りさんの宿題　作者：okimai</p>
+    </header>
+    <main>
+        <section class="container">
+            <p class="con">A </p>
+            <p class="con">B</p>
+            <p class="con">C</p>
+            <p class="con">D</p>
+        </section>
     </main>
-	<footer><div class="container">© 雛桜日本語サークル</div></footer>
+
+    <footer>
+        <p>©雛桜日本語サークル</p>
+    </footer>
 </body>
 </html>
